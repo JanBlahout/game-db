@@ -21,11 +21,8 @@ export type Platform = {
 
 function App() {
   const [games, setGames] = useState<TGame[]>([]);
-  const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const pageSize = 20;
 
   const loadMoreHandler = async () => {
     setIsLoading(true);
