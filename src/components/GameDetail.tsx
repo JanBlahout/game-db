@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ShowMoreText from './ShowMoreText';
+import { Icon } from '@iconify/react';
+import { Button } from './ui/button';
 
 type Game = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,6 +61,16 @@ type Tag = {
   games_count: number;
 };
 
+type TPlatformIcons = {
+  [key: string]: JSX.Element;
+};
+
+const platformsIcons: TPlatformIcons = {
+  PC: <Icon icon="simple-icons:windows10" width="24" />,
+  PLAYSTATION: <Icon icon="simple-icons:playstation" width="24" />,
+  XBOX: <Icon icon="simple-icons:xbox" width="24" />,
+};
+
 export default function GameDetail() {
   const { id } = useParams();
   const [game, setGame] = useState<Game | null>(null);
@@ -68,7 +81,7 @@ export default function GameDetail() {
       `https://api.rawg.io/api/games/${id}?key=${import.meta.env.VITE_API_KEY}`
     );
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
     setGame(data);
   };
 
@@ -94,11 +107,11 @@ export default function GameDetail() {
 
   return (
     <div className="flex justify-center flex-col md:flex-row">
-      <div className="max-w-[700px] md:max-w-[960px] flex-auto">
+      <div className="max-w-[700px] flex-auto pr-6">
         <ul className="flex gap-2">
           {game.parent_platforms.map((parent_platform: ParentPlatform) => (
             <li key={parent_platform.platform.id}>
-              {parent_platform.platform.name}
+              {platformsIcons[parent_platform.platform.name.toUpperCase()]}
             </li>
           ))}
           <li>AVERAGE PLAYTIME: {game.playtime} HOURS</li>
@@ -107,7 +120,7 @@ export default function GameDetail() {
         <h1 className="text-[4rem] font-bold">{game.name}</h1>
         <div className="pb-3">
           <h3 className="text-2xl font-bold">About</h3>
-          <p>{game.description_raw}</p>
+          <ShowMoreText text={game.description_raw} />
         </div>
         <div className="flex flex-wrap ">
           <div className="w-1/2 pb-3">
@@ -171,12 +184,12 @@ export default function GameDetail() {
             ))}
           </div>
         </div>
-        <div className="pb-3">
+        <div className="pb-3 pr-6 whitespace-break-spaces">
           <p>Tags:</p>
           {game.tags.map((tag, index) => (
             <Link
               to={`/tags/${tag.slug}`}
-              className="underline pl-1 first-of-type:pl-0"
+              className="underline pl-1 first-of-type:pl-0 break-words"
             >
               {index === game.tags.length - 1 ? tag.name : `${tag.name},`}
             </Link>
@@ -191,15 +204,21 @@ export default function GameDetail() {
         <h3>Games like {game.name}</h3>
       </div>
       <div className="w-[384px] flex-shrink-0 flex-grow-0 ml-10">
-        <div className="bg-slate-600">
-          <h2 className="text-2xl font-bold">Images</h2>
+        <div className="pb-3">
           <img src={game.background_image} alt={`${game.name} image`} />
-          <img
-            src={game.background_image_additional}
-            alt={`${game.name} additional image`}
-          />
-          {screenshots?.results.map((screenshot) => (
-            <img src={screenshot.image} alt="screenshot" />
+
+          <div className="grid grid-cols-2">
+            {screenshots?.results.map((screenshot) => (
+              <img src={screenshot.image} alt="screenshot" />
+            ))}
+          </div>
+        </div>
+        <h3 className="text-2xl ">Where to buy</h3>
+        <div className="flex flex-wrap ">
+          {game.stores.map((store) => (
+            <Button className="w-[184px] h-[40px] even:ml-4 mt-4">
+              {store.store.name}
+            </Button>
           ))}
         </div>
       </div>
