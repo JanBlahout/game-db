@@ -32,3 +32,7 @@ If you are developing a production application, we recommend updating the config
 - Get the API key.
 - Create .env file in the root directory.
 - Enter following line VITE_API_KEY=your_api_key
+
+# LIVE PAGE
+
+https://soft-zabaione-0ef98f.netlify.app
