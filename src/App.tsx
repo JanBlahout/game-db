@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useGamesFetch } from './hooks/useGames';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Card from './components/Card';
-import { Button } from './components/ui/button';
+import Loader from './components/Loader';
 
 type TGame = {
   id: number;
@@ -20,47 +21,39 @@ export type Platform = {
 };
 
 function App() {
-  const [games, setGames] = useState<TGame[]>([]);
-  const [nextPage, setNextPage] = useState('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { data, fetchNextPage, hasNextPage, isLoading } = useGamesFetch();
 
-  const loadMoreHandler = async () => {
-    setIsLoading(true);
-    const data = await fetch(nextPage);
-    const response = await data.json();
-    setNextPage(response.next);
-    setGames([...games, ...response.results]);
-    setIsLoading(false);
-  };
-
-  const getGames = async (): Promise<TGame[]> => {
-    const response = await fetch(
-      `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}`
-    );
-    const data = await response.json();
-    setNextPage(data.next);
-    setGames(data.results);
-    return data.results;
-  };
-  useEffect(() => {
-    getGames();
+  const games = data?.pages.reduce((acc, page) => {
+    return [...acc, ...page.results];
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-1/2 flex items-center justify-center">
+        <Loader />;
+      </div>
+    );
+  }
+
   return (
-    <main className="m-24 rounded-md grid grid-cols-4 gap-12 ">
-      {games.map((game) => (
-        <Card
-          image={game.background_image}
-          metascore={game.metacritic}
-          platforms={game.parent_platforms}
-          key={game.id}
-          {...game}
-        />
-      ))}
-      <Button onClick={loadMoreHandler} disabled={!nextPage}>
-        {isLoading ? 'Loading...' : 'Load more...'}
-      </Button>
-    </main>
+    <InfiniteScroll
+      dataLength={games ? games.length : 0}
+      next={() => fetchNextPage()}
+      hasMore={hasNextPage}
+      loader
+    >
+      <main className="m-24 rounded-md grid grid-cols-4 gap-12 ">
+        {games.map((game: TGame) => (
+          <Card
+            image={game.background_image}
+            metascore={game.metacritic}
+            platforms={game.parent_platforms}
+            key={game.id}
+            {...game}
+          />
+        ))}
+      </main>
+    </InfiniteScroll>
   );
 }
 
