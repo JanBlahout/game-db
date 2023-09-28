@@ -1,5 +1,5 @@
 import { Platform } from '@/App';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
@@ -12,18 +12,18 @@ type CardProps = {
 
 export default function Card(props: CardProps) {
   const { image, name, platforms, metascore, id } = props;
-  const [beingHovered, setBeingHovered] = useState<boolean>(false);
+  // const [beingHovered, setBeingHovered] = useState<boolean>(false);
   const navigate = useNavigate();
 
   return (
     <div
       className="rounded-lg bg-slate-800 text-white col-span-4 md:col-span-3 lg:col-span-2 xl:col-span-1"
-      onMouseEnter={() => {
-        setBeingHovered(true);
-      }}
-      onMouseLeave={() => {
-        setBeingHovered(false);
-      }}
+      // onMouseEnter={() => {
+      //   setBeingHovered(true);
+      // }}
+      // onMouseLeave={() => {
+      //   setBeingHovered(false);
+      // }}
       onClick={() => navigate(`/game/${id}`)}
     >
       <img
