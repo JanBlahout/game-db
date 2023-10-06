@@ -1,15 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { Input } from './ui/input';
 
 function NavLinks() {
   return (
     <>
-      <Input
-        className="mx-4 w-full sm:w-1/3  bg-slate-500 placeholder:text-white hover:bg-white hover:placeholder:text-slate-500 focus:bg-white focus:placeholder:text-slate-500 transition-all border-none max-w-xs"
-        placeholder="Search for games"
-      />
       <NavLink to={''}>Link 1</NavLink>
       <NavLink to={''}>Link 2</NavLink>
       <NavLink to={''}>Link 3</NavLink>
@@ -26,7 +21,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="md:w-2/3 flex justify-end ">
+      <div className="md:w-1/3 flex justify-end ">
         <div className="hidden md:flex justify-between w-full  items-center pl-4">
           <NavLinks />
         </div>
