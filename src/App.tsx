@@ -42,7 +42,7 @@ function App() {
       hasMore={hasNextPage}
       loader
     >
-      <main className="m-24 rounded-md grid grid-cols-4 gap-12 ">
+      <main className="m-4 md:m-24 rounded-md grid grid-cols-4 gap-12 ">
         {games.map((game: TGame) => (
           <Card
             image={game.background_image}

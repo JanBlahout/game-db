@@ -109,7 +109,7 @@ export default function GameDetail() {
   }
 
   return (
-    <div className="flex justify-center flex-col md:flex-row">
+    <div className="flex justify-center flex-col md:flex-row items-center">
       <div className="max-w-[700px] flex-auto pr-6">
         <ul className="flex gap-2">
           {game?.parent_platforms.map((parent_platform: ParentPlatform) => (
@@ -120,7 +120,7 @@ export default function GameDetail() {
           <li>AVERAGE PLAYTIME: {game?.playtime} HOURS</li>
         </ul>
 
-        <h1 className="text-[4rem] font-bold">{game?.name}</h1>
+        <h1 className="text-[3rem] lg:text-[4rem] font-bold">{game?.name}</h1>
         <div className="pb-3">
           <h3 className="text-2xl font-bold">About</h3>
           <ShowMoreText text={game?.description_raw} />
@@ -206,7 +206,7 @@ export default function GameDetail() {
         </div>
         <h3>Games like {game?.name}</h3>
       </div>
-      <div className="w-[384px] flex-shrink-0 flex-grow-0 ml-10">
+      <div className="w-[384px] flex-shrink-0 flex-grow-0 md:ml-10 pb-10">
         <div className="pb-3">
           <img src={game?.background_image} alt={`${game?.name} image`} />
 
