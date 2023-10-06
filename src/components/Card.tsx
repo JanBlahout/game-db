@@ -17,7 +17,7 @@ export default function Card(props: CardProps) {
 
   return (
     <div
-      className="rounded-lg bg-slate-800 text-white col-span-4 md:col-span-3 lg:col-span-2 xl:col-span-1"
+      className="rounded-lg bg-slate-800 text-white col-span-5 md:col-span-4 lg:col-span-2 xl:col-span-1"
       // onMouseEnter={() => {
       //   setBeingHovered(true);
       // }}
