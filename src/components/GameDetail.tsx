@@ -97,9 +97,6 @@ export default function GameDetail() {
   const { data: screenshots, isLoading: screenshotsIsLoading } =
     useScreenshotsFetch(Number(id));
 
-  console.log('game', game);
-  console.log('screenshots', screenshots);
-
   if (gameIsLoading || screenshotsIsLoading) {
     return (
       <div className="w-full h-1/2 flex items-center justify-center">

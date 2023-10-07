@@ -24,7 +24,6 @@ export default function Card(props: CardProps) {
       // onMouseLeave={() => {
       //   setBeingHovered(false);
       // }}
-      onClick={() => navigate(`/game/${id}`)}
     >
       <img
         src={image}
@@ -100,7 +99,12 @@ export default function Card(props: CardProps) {
             </span>
           )}
         </div>
-        <h2 className="text-2xl font-bold pt-4">{name}</h2>
+        <h2
+          className="text-2xl font-bold pt-4 hover:text-gray-600 transition-all cursor-pointer"
+          onClick={() => navigate(`/game/${id}`)}
+        >
+          {name}
+        </h2>
       </div>
     </div>
   );
