@@ -128,8 +128,9 @@ export default function GameDetail() {
             <div className="whitespace-pre-wrap">
               {game?.platforms.map((platform, index) => (
                 <Link
-                  to={`/games/${platform.platform.slug}`}
+                  to={`/platforms/${platform.platform.slug}`}
                   className="underline pl-1 first-of-type:pl-0"
+                  key={index}
                 >
                   {index === game.platforms.length - 1
                     ? platform.platform.name

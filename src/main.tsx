@@ -6,6 +6,8 @@ import './index.css';
 import GameDetail from './components/GameDetail.tsx';
 import Layout from './components/Layout.tsx';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import GamesByTag from './components/GamesByTag.tsx';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,12 +19,13 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: '/test',
-        element: <div>Test</div>,
-      },
-      {
         path: '/game/:id',
         element: <GameDetail />,
+      },
+      {
+        path: '/tags/:tag',
+        element: <GamesByTag />,
+        errorElement: <ErrorBoundary />,
       },
     ],
   },
