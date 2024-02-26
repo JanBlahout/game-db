@@ -2,7 +2,6 @@ import { useGamesByIdFetch } from '@/hooks/useSearchGames';
 import { Input } from './ui/input';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 
 type TGame = {
   id: number;
