@@ -1,7 +1,8 @@
-import { useGamesFetch } from './hooks/useGames';
+import { useGamesFetchWithParams } from '@/hooks/useGamesWithParam';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Card from './components/Card';
-import Loader from './components/Loader';
+import { useParams } from 'react-router-dom';
+import Loader from './Loader';
+import Card from './Card';
 
 type TGame = {
   id: number;
@@ -20,8 +21,14 @@ export type Platform = {
   };
 };
 
-function App() {
-  const { data, fetchNextPage, hasNextPage, isLoading } = useGamesFetch();
+function GamesByGenre() {
+  const { genre } = useParams();
+
+  const { data, fetchNextPage, hasNextPage, isLoading } =
+    useGamesFetchWithParams({
+      name: 'genres',
+      value: genre!,
+    });
 
   const games = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.results];
@@ -42,6 +49,9 @@ function App() {
       hasMore={hasNextPage}
       loader
     >
+      <h1 className="text-center text-2xl font-bold text-slate-700">
+        {genre?.toUpperCase()} Games
+      </h1>
       <main className="m-4 md:m-24 rounded-md grid grid-cols-4 gap-12 ">
         {games.map((game: TGame) => (
           <Card
@@ -57,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default GamesByGenre;
