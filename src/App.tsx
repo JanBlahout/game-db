@@ -2,7 +2,7 @@ import { useGamesFetch } from './hooks/useGames';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Card from './components/Card';
 import Loader from './components/Loader';
-import { useGamesFetchWithParams } from './hooks/useGamesWithParam';
+//import { useGamesFetchWithParams } from './hooks/useGamesWithParam';
 
 type TGame = {
   id: number;
@@ -25,15 +25,15 @@ function App() {
   const { data, fetchNextPage, hasNextPage, isLoading } = useGamesFetch();
 
   // REMOVE THIS, only for testing
-  const { data: gamesWithFilter } = useGamesFetchWithParams({
-    name: 'genres',
-    value: 'strategy',
-  });
+  // const { data: gamesWithFilter } = useGamesFetchWithParams({
+  //   name: 'genres',
+  //   value: 'strategy',
+  // });
   const games = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.results];
   }, []);
 
-  console.log(gamesWithFilter);
+  // console.log(gamesWithFilter);
 
   if (isLoading) {
     return (
