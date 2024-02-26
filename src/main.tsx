@@ -8,6 +8,7 @@ import Layout from './components/Layout.tsx';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import GamesByTag from './components/GamesByTag.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
+import GamesByGenre from './components/GamesByGenre.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
       {
         path: '/tags/:tag',
         element: <GamesByTag />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: '/games/:genre',
+        element: <GamesByGenre />,
         errorElement: <ErrorBoundary />,
       },
     ],
