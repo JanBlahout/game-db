@@ -25,15 +25,15 @@ function App() {
   const { data, fetchNextPage, hasNextPage, isLoading } = useGamesFetch();
 
   // REMOVE THIS, only for testing
-  const { data: gamesWithFilter } = useGamesFetchWithParams({
-    name: 'genres',
-    value: 'strategy',
-  });
+  // const { data: gamesWithFilter } = useGamesFetchWithParams({
+  //   name: 'genres',
+  //   value: 'strategy',
+  // });
   const games = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.results];
   }, []);
 
-  console.log(gamesWithFilter);
+  // console.log(gamesWithFilter);
 
   if (isLoading) {
     return (
