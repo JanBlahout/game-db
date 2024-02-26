@@ -1,8 +1,8 @@
-import { useGamesFetch } from './hooks/useGames';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Card from './components/Card';
-import Loader from './components/Loader';
-import { useGamesFetchWithParams } from './hooks/useGamesWithParam';
+import { useGamesFetch } from "./hooks/useGames";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Card from "./components/Card";
+import Loader from "./components/Loader";
+//import { useGamesFetchWithParams } from './hooks/useGamesWithParam';
 
 type TGame = {
   id: number;
