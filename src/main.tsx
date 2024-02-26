@@ -33,6 +33,10 @@ const router = createBrowserRouter([
         element: <GamesByGenre />,
         errorElement: <ErrorBoundary />,
       },
+      {
+        path: '*',
+        element: <ErrorBoundary />,
+      },
     ],
   },
 ]);
